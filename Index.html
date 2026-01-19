@@ -98,25 +98,6 @@ position: relative;
 z-index: 10;
 }
 
-/* --- SMALL CART (CENTER TOP IN HEADER) --- */
-.small-cart-wrapper {
-position: absolute;
-top: 20px;
-left: 50%;
-transform: translateX(-50%);
-z-index: 100;
-background: #fff;
-padding: 10px;
-border-radius: 50%;
-box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-border: 1px solid #eee;
-}
-.small-cart-wrapper svg {
-width: 28px;
-height: 28px;
-color: #000;
-}
-
 /* --- HOME & RELOAD BUTTONS WRAPPER (TOP LEFT FIXED) --- */
 .top-controls-wrapper {
     position: fixed;
@@ -228,6 +209,8 @@ color: #000 !important;
 transform: scale(1.05) !important;
 box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4) !important;
 }
+
+.lets-shop-btn:hover svg { stroke: #000; } /* Change cart icon color on hover */
 
 .lets-shop-arrow { display: block; animation: bounceDown 1s infinite; }
 
@@ -341,8 +324,8 @@ box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4) !important;
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 85%;
-    max-width: 400px;
+    width: 90%; /* INCREASED FROM 85% TO FIT 3 CARDS */
+    max-width: 600px; /* INCREASED FROM 400PX */
     margin: 0 auto;
     height: 60px; /* Increased slightly for boxes */
     border-radius: 30px;
@@ -373,7 +356,7 @@ box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4) !important;
     font-weight: 300; /* Thin Font */
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #333;
+    color: #000000; /* Dark Black */
     cursor: pointer;
     padding: 8px 16px; /* Padding for box shape */
     border-radius: 6px; /* Box radius */
@@ -740,6 +723,71 @@ opacity: 0;
 }
 
 .hidden { display: none !important; }
+
+/* ========================================= */
+/* THANK YOU OVERLAY (PROMINENT & ANIMATED)
+/* ========================================= */
+#thankYouOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Dark overlay */
+    backdrop-filter: blur(8px); /* Modern blur */
+    z-index: 50000; /* Above everything */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+#thankYouOverlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.thank-you-card {
+    background: linear-gradient(135deg, #ffffff, #fffef0); /* Warm tint */
+    width: 90%;
+    max-width: 500px; /* Wider for text */
+    padding: 50px 40px; /* More padding */
+    border-radius: 24px;
+    text-align: center;
+    border: 3px solid #FFD700; /* Thicker Gold Border */
+    box-shadow: 0 25px 60px rgba(255, 215, 0, 0.3); /* Glow effect */
+    position: relative;
+    overflow: hidden;
+    
+    /* PROMINENT POP ANIMATION */
+    transform: scale(0.8);
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    70% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.thank-title {
+    font-family: 'Arial', sans-serif; /* Clean Font */
+    font-size: 32px; /* Prominent Title */
+    font-weight: 800;
+    color: #000000;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.thank-msg {
+    font-size: 18px; /* Readable Text */
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 0; /* Removed margin as footer removed */
+    font-weight: 500;
+}
 
 /* ========================================= */
 /* ZOOM VIEWER (FULL SCREEN) STYLES
@@ -1153,9 +1201,7 @@ transform: translateX(-50%) translateY(0);
 
 <!-- 1. COVER HEADER SECTION -->
 <div class="cover-container">
-    <div class="small-cart-wrapper" title="Cart">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-    </div>
+    <!-- STANDALONE CART REMOVED -->
 
     <div class="hero-wrapper">
     <div class="hero-group">
@@ -1168,7 +1214,10 @@ transform: translateX(-50%) translateY(0);
     <div class="subtitle-text">CLICK.SHOP.ENJOY</div>
     <div class="double-line bottom-line"></div>
     </div>
+    
+    <!-- CART ICON MOVED INSIDE BUTTON -->
     <button class="lets-shop-btn" onclick="scrollToProducts()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #fff;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
         <span>Let's Shop</span>
         <span class="lets-shop-arrow">▼</span>
     </button>
@@ -1254,7 +1303,6 @@ transform: translateX(-50%) translateY(0);
 </div>
 </div>
 </div>
-</div>
 
 <!-- 6. ZOOM VIEWER OVERLAY -->
 <div id="zoomViewer">
@@ -1270,13 +1318,22 @@ transform: translateX(-50%) translateY(0);
     <button class="zoom-back-btn" onclick="closeZoomViewer()">✖ Back to Products</button>
 </div>
 
+<!-- NEW PROMINENT THANK YOU OVERLAY -->
+<div id="thankYouOverlay">
+    <div class="thank-you-card">
+        <!-- Icon removed to focus on text as requested -->
+        <h2 class="thank-title">Thank you for your order! 🎉</h2>
+        <p class="thank-msg">Your order has been successfully received.<br>Our team will contact you shortly for confirmation and delivery details.<br>If you need any help, feel free to message us anytime. 😊</p>
+    </div>
+</div>
+
 <!-- TOAST NOTIFICATION ELEMENT -->
 <div id="toast" class="toast-notification">Order Saved!</div>
 
 <!-- 9. JAVASCRIPT LOGIC -->
 <script>
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzr4SQWPcJFN2rJ3BrHBI1clHKBT39Vm7ldry4b1t-aFNsJ9ebVrVh6zsb1FJ5qyk_t/exec";
-const VISITOR_TRACKER_URL = "https://script.google.com/macros/s/AKfycbz2dANcMTZaCsTucRR4qcHRTKfFi_4HHqZ5APKlMMYjJSvQ-5tZMcurRPizvC3ijdQ.exec";
+const VISITOR_TRACKER_URL = "https://script.google.com/macros/s/AKfycbz2dANcMTZaCsTucRR4qcHRTKfFi_4HHqZ5APKlMMYjJSvQ-5tZMcurRPizvC3ijdQ/exec";
 
 /* --- SCROLL RESTORATION FIX --- */
 if ('scrollRestoration' in history) {
@@ -1289,6 +1346,7 @@ const DB_KEY = 'MAK360_ProductDB';
 const CAT_DB_KEY = 'MAK360_Categories';
 let currentCategoryFilter = 'All';
 let isNavigating = false; 
+let orderJustPlaced = false; // Flag for Thank You logic
 
 /* --- APP MODE FULLSCREEN LOGIC --- */
 let exitFullscreenTimeout;
@@ -1316,11 +1374,11 @@ document.addEventListener('fullscreenchange', () => {
         // Clear any existing timer
         clearTimeout(exitFullscreenTimeout);
         
-        // Start 20 second timer to re-enter (CHANGED FROM 5000 to 20000)
+        // Start 20 second timer to re-enter
         exitFullscreenTimeout = setTimeout(() => {
             toggleFullScreen(true);
             showToast("Returning to App Mode...");
-        }, 20000); 
+        }, 20000); // 20 Seconds delay
     } else {
         // Entered fullscreen
         clearTimeout(exitFullscreenTimeout);
@@ -1485,27 +1543,30 @@ slides:[
 
 /* --- SEED DATA (DEFAULT CATEGORIES) --- */
 const defaultCategories = [
-    { name: "All", visible: true, deletable: false },
-    { name: "Jewelries", visible: true, deletable: true },
-    { name: "Shoes", visible: true, deletable: true },
-    { name: "Sentiments", visible: true, deletable: true },
-    { name: "Handbags", visible: true, deletable: true },
-    { name: "Cloths", visible: true, deletable: true },
-    { name: "Shawls", visible: true, deletable: true },
-    { name: "Watches", visible: true, deletable: true },
-    { name: "Bedsheets", visible: true, deletable: true },
-    { name: "Computer", visible: true, deletable: true },
-    { name: "Mobile", visible: true, deletable: true },
-    { name: "Kitchen", visible: true, deletable: true },
-    { name: "Foods", visible: true, deletable: true },
-    { name: "Services", visible: true, deletable: true },
-    { name: "Fashion", visible: true, deletable: true }
-
+    { name: "All", visible: true, deletable: false, order: 1 },
+    
+    // Apni marzi ke hisaab se order (1, 2, 3...) set karein
+    // Ye list mein Shoes pehle ayega kyunke uska order 2 hai
+    
+    { name: "Shoes", visible: true, deletable: true, order: 7 },
+    { name: "Handbags", visible: true, deletable: true, order: 3 },
+    { name: "Fashion", visible: true, deletable: true, order: 5 },
+    { name: "Jewelries", visible: true, deletable: true, order: 2 },
+    { name: "Sentiments", visible: true, deletable: true, order: 6 },
+    { name: "Cloths", visible: true, deletable: true, order: 4 },
+    { name: "Shawls", visible: true, deletable: true, order: 8 },
+    { name: "Watches", visible: true, deletable: true, order: 9 },
+    { name: "Bedsheets", visible: true, deletable: true, order: 10 },
+    { name: "Computer", visible: true, deletable: true, order: 11 },
+    { name: "Mobile", visible: true, deletable: true, order: 12 },
+    { name: "Kitchen", visible: true, deletable: true, order: 13 },
+    { name: "Foods", visible: true, deletable: true, order: 14 },
+    { name: "Services", visible: true, deletable: true, order: 15 }
 ];
-
 /* --- GLOBAL ARRAYS --- */
 var products = [];
 var categories = [];
+var cart = []; // New Cart Array
 
 /* --- UPDATED LOAD PRODUCTS (HYBRID LOGIC + LIVE SYNC) --- */
 function loadProducts() {
@@ -1571,6 +1632,11 @@ const clickSound = new Audio('https://cdn.pixabay.com/download/audio/2022/03/09/
 clickSound.volume = 0.3; clickSound.preload = 'auto'; 
 const crowdSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3'); 
 crowdSound.volume = 1.0; crowdSound.preload = 'auto';
+
+// Success Sound (Classic Fanfare) - Defined but will not be used
+const successSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2501/2501-preview.mp3');
+successSound.volume = 1.0;
+successSound.preload = 'auto';
 
 var container=document.getElementById("productContainer");
 
@@ -1874,7 +1940,16 @@ function renderStore() {
         show(); 
         playClickSound(); 
     };
-    card.querySelector(".orderBtn").onclick = (e) => { e.stopPropagation(); openModal(p, i); };
+
+    /* ========================================= */
+    /* FIXED ADD TO CART / ORDER BUTTON LOGIC   */
+    /* ========================================= */
+    card.querySelector(".orderBtn").onclick = (e) => { 
+        e.stopPropagation(); 
+        // FIX: Instead of just saving to a hidden array, open the Order Modal
+        // so the user can actually fill in details and place the order.
+        openModal(p, realIndex);
+    };
 
     shareBtn.onclick = (e) => { 
         e.stopPropagation(); 
@@ -1892,10 +1967,17 @@ function renderCategoryBar() {
     const track = document.getElementById("categoryTrack");
     track.innerHTML = "";
     
+    // UPDATED SORTING LOGIC: Sort by 'order' number instead of alphabet
     const sortedCats = [...categories].sort((a, b) => {
+        // Always keep "All" at the very start
         if(a.name === "All") return -1;
         if(b.name === "All") return 1;
-        return a.name.localeCompare(b.name);
+
+        // Read order number, if missing treat as 999 (send to bottom)
+        const orderA = a.order !== undefined ? a.order : 999;
+        const orderB = b.order !== undefined ? b.order : 999;
+
+        return orderA - orderB;
     });
 
     sortedCats.forEach(cat => {
@@ -2076,12 +2158,12 @@ const catNextBtn = document.getElementById("catNextBtn");
 const categoryTrack = document.getElementById("categoryTrack");
 
 catPrevBtn.addEventListener('click', () => {
-    categoryTrack.scrollBy({ left: -150, behavior: 'smooth' });
+    categoryTrack.scrollTo({ left: 0, behavior: 'smooth' }); // SCROLL TO START
     playClickSound();
 });
 
 catNextBtn.addEventListener('click', () => {
-    categoryTrack.scrollBy({ left: 150, behavior: 'smooth' });
+    categoryTrack.scrollBy({ left: 150, behavior: 'smooth' }); // NORMAL SCROLL
     playClickSound();
 });
 
@@ -2207,49 +2289,73 @@ function navigate(direction) {
     var cards = Array.from(document.querySelectorAll(".productCard"));
     if(cards.length === 0) return;
     isNavigating = true; 
-    var currentCenterCardIndex = -1; var viewportCenter = window.innerHeight / 2; var minDistance = 99999;
+    
+    // 1. Find current center card
+    var currentCenterCardIndex = -1; 
+    var viewportCenter = window.innerHeight / 2; 
+    var minDistance = 99999;
+
     cards.forEach((card, index) => {
         var rect = card.getBoundingClientRect();
         let cardCenter = rect.top + (rect.height / 2);
         let distance = Math.abs(viewportCenter - cardCenter);
         if (rect.top < window.innerHeight && rect.bottom > 0) {
-            if (distance < minDistance) { minDistance = distance; currentCenterCardIndex = index; }
+            if (distance < minDistance) { 
+                minDistance = distance; 
+                currentCenterCardIndex = index; 
+            }
         }
     });
+
+    // If no card is near center (e.g. at top), pick first
+    if (currentCenterCardIndex === -1) currentCenterCardIndex = 0;
+
     let cols = getColumns();
     let targetIndex = -1;
+
     if (direction === 'down') {
-        if (currentCenterCardIndex === -1) { 
-            targetIndex = 0;
-        } else {
-            targetIndex = currentCenterCardIndex + cols;
-        }
+        targetIndex = currentCenterCardIndex + cols;
+        
+        // If target is beyond array, scroll to bottom
         if (targetIndex < cards.length) {
-            let targetY = window.scrollY + cards[targetIndex].getBoundingClientRect().top - 70;
-            window.scrollTo({ top: targetY, behavior: 'smooth' });
+            // Calculate absolute center position of target card
+            let targetRect = cards[targetIndex].getBoundingClientRect();
+            let targetCenterY = window.scrollY + targetRect.top + (targetRect.height / 2);
+            let viewportCenterY = window.innerHeight / 2;
+            
+            // Calculate scroll position needed to bring targetCenterY to viewportCenterY
+            let scrollTarget = targetCenterY - viewportCenterY;
+
+            window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
             playClickSound();
-            setTimeout(() => { 
-                localStorage.setItem(STORAGE_KEY, window.scrollY); 
-                isNavigating = false; 
-            }, 500);
         } else {
-             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
+
     } else if (direction === 'up') {
         if (currentCenterCardIndex === 0) { 
             window.scrollTo({ top: 0, behavior: 'smooth' }); 
-            playClickSound(); return; 
+            playClickSound(); 
+            return; 
         }
+        
         let prevIndex = currentCenterCardIndex - cols;
         if (prevIndex < 0) prevIndex = 0;
-        let targetY = window.scrollY + cards[prevIndex].getBoundingClientRect().top - 70;
-        window.scrollTo({ top: targetY, behavior: 'smooth' });
+        
+        let targetRect = cards[prevIndex].getBoundingClientRect();
+        let targetCenterY = window.scrollY + targetRect.top + (targetRect.height / 2);
+        let viewportCenterY = window.innerHeight / 2;
+        
+        let scrollTarget = targetCenterY - viewportCenterY;
+
+        window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
         playClickSound();
-        setTimeout(() => { 
-            localStorage.setItem(STORAGE_KEY, window.scrollY); 
-            isNavigating = false; 
-        },500);
     }
+
+    setTimeout(() => { 
+        localStorage.setItem(STORAGE_KEY, window.scrollY); 
+        isNavigating = false; 
+    }, 800);
 }
 
 /* ================= MODAL LOGIC ================= */
@@ -2370,7 +2476,7 @@ let supplyCode = currentModalProduct.supplyCode || 'N/A';
 let msg = `Product: ${currentModalProduct.title}\nImage: ${imageUrl}\nQty: ${mQty.value}\nTotal: Rs ${totalDisplayPrice}\nName: ${mName.value}\nAddress: ${mAddress.value}\nPhone: ${mPhone.value}\n\n(Item Code: ${itemCode} | Sup Code: ${supplyCode})`;
 
 // ============================================
-// CHANGE1: OPEN WHATSAPP IMMEDIATELY (SABSE PEHLE)
+// CHANGE 1: OPEN WHATSAPP IMMEDIATELY (SABSE PEHLE)
 // ============================================
 // Browser tab pop-up block nahi karega kyunke yeh direct user click hai
 window.open("https://wa.me/923120380605?text="+encodeURIComponent(msg), '_blank');
@@ -2380,6 +2486,11 @@ window.open("https://wa.me/923120380605?text="+encodeURIComponent(msg), '_blank'
 // ============================================
 // User ko WA par message likhne dijiye, Modal close kar dein
 closeModal();
+
+// ============================================
+// SET FLAG FOR THANK YOU OVERLAY
+// ============================================
+orderJustPlaced = true;
 
 // ============================================
 // CHANGE 3: GOOGLE SHEET SAVE IN BACKGROUND
@@ -2421,7 +2532,79 @@ toast.classList.add("show");
 setTimeout(() => { toast.classList.remove("show"); }, 3000);
 }
 
-/* ================= PRELOADER LOGIC ================= */
+/* ========================================= */
+/* BACKEND WARMUP LOGIC (NEW)
+/* ========================================= */
+function warmupBackend() {
+    // Ensure products are loaded before warming up
+    if (products.length === 0) {
+        console.log("Products not yet loaded, skipping warmup.");
+        return;
+    }
+
+    console.log("Starting Force Backend Refresh (Warmup)...");
+    
+    let hitCount = 0;
+    
+    // Loop through all products
+    products.forEach(p => {
+        if(p.isHidden) return;
+        
+        // Loop through all slides
+        p.slides.forEach(slide => {
+            // Force Hit Images using Image object
+            if (slide.type === 'image') {
+                const img = new Image();
+                img.src = slide.url; // Triggers network request
+                hitCount++;
+            } 
+            // Force Hit Videos (HEAD request is lighter than downloading whole video)
+            else if (slide.type === 'video') {
+                fetch(slide.url, { method: 'HEAD', mode: 'no-cors' }).catch(() => {});
+                hitCount++;
+            }
+        });
+    });
+
+    if(hitCount > 0) {
+        console.log(`Forced ${hitCount} backend hits initiated.`);
+        showToast("Backend Refreshed! Ready to View.");
+    } else {
+        console.log("No products found to warmup.");
+    }
+}
+
+/* ========================================= */
+/* THANK YOU OVERLAY LOGIC (UPDATED - NO SOUND)
+/* ========================================= */
+function showThankYouOverlay() {
+    const overlay = document.getElementById("thankYouOverlay");
+    if(!overlay) return;
+    
+    overlay.classList.add("active");
+    
+    // SOUND REMOVED AS REQUESTED
+
+    // Hide after 5 seconds (Increased for reading the new text)
+    setTimeout(() => {
+        overlay.classList.remove("active");
+    }, 5000);
+}
+
+// Detect when user returns to tab
+window.addEventListener('focus', () => {
+    if(orderJustPlaced) {
+        // Trigger Thank You Overlay
+        showThankYouOverlay();
+        
+        // Reset flag so it doesn't trigger again
+        orderJustPlaced = false;
+    }
+});
+
+/* ========================================= */
+/* PRELOADER LOGIC
+/* ========================================= */
 function removePreloader() {
     const preloader = document.getElementById('preloader');
     if (preloader) {
@@ -2435,7 +2618,9 @@ function removePreloader() {
     }
 }
 
-/* ================= LIVE SYNC FEATURE ================= */
+/* ========================================= */
+/* LIVE SYNC FEATURE
+/* ========================================= */
 window.addEventListener('storage', function(e) {
     // If 'MAK360_ProductDB' value changes in another tab (Product Manager)
     if (e.key === 'MAK360_ProductDB') {
@@ -2450,9 +2635,33 @@ window.addEventListener('storage', function(e) {
     }
 });
 
-/* ================= INIT ================= */
+/* ========================================= */
+/* VISITOR TRACKING LOGIC (FIXED)
+/* ========================================= */
+function trackVisitor() {
+    // Check if the URL is defined to prevent errors
+    if (typeof VISITOR_TRACKER_URL !== 'undefined') {
+        // Using 'no-cors' mode to ensure the request goes through without CORS errors
+        // on the client side, even if we can't read the response content.
+        fetch(VISITOR_TRACKER_URL, { method: 'GET', mode: 'no-cors' })
+            .then(() => {
+                console.log("Visitor tracked successfully.");
+            })
+            .catch(error => {
+                console.error("Error tracking visitor:", error);
+            });
+    }
+}
+
+/* ========================================= */
+/* INIT
+/* ========================================= */
 window.addEventListener('DOMContentLoaded', () => {
     console.log("DOM Loaded");
+    
+    // --- FIX: CALL VISITOR TRACKER HERE ---
+    trackVisitor();
+
     loadProducts();
     loadCategories(); 
     
@@ -2460,9 +2669,16 @@ window.addEventListener('DOMContentLoaded', () => {
     window.scrollTo(0, 0);
     document.body.classList.add('landing-mode');
     
+    // REMOVE PRELOADER AFTER 2.5 SECONDS
     setTimeout(() => {
         removePreloader();
     }, 2500);
+
+    // START 10 SECOND TIMER FOR WARMUP
+    // Requirement: "Jab HTML page khuly wo page khulny k 10 seconds baad backend per force refresh"
+    setTimeout(() => {
+        warmupBackend();
+    }, 10000); // 10 Seconds delay
 });
 
 window.addEventListener('load', function() {

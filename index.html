@@ -118,7 +118,7 @@ flex-shrink: 0;
 }
 
 /* ========================================= */
-/* UPDATED MINI MENU (CATEGORIES ADDED)
+/* UPDATED MINI MENU (CATEGORIES ONLY)
 /* ========================================= */
 .mini-menu-wrapper {
 position: relative;
@@ -254,7 +254,7 @@ transition: all 0.3s ease;
 .home-btn-wrapper svg { width: 24px; height: 24px; color: #000; }
 
 /* ========================================= */
-/* TOP RIGHT NAVIGATION LINKS
+/* TOP RIGHT NAVIGATION LINKS (LANDING PAGE ONLY)
 /* ========================================= */
 .nav-links-wrapper {
 position: fixed;
@@ -267,6 +267,7 @@ gap: 15px;
 transition: opacity 0.3s;
 }
 
+/* This CSS ensures they vanish when the mini header appears */
 body.has-mini-header .nav-links-wrapper {
 opacity: 0;
 pointer-events: none;
@@ -282,6 +283,7 @@ letter-spacing: 0.5px;
 cursor: pointer;
 transition: all 0.3s ease;
 position: relative;
+white-space: nowrap; /* Prevents wrapping */
 }
 
 .nav-link:hover {
@@ -304,15 +306,16 @@ width: 100%;
 left: 0;
 }
 
+/* MOBILE FIX: Align to Home Row & Prevent Wrap */
 @media(max-width: 600px) {
 .nav-links-wrapper {
-top: 70px;
-right: 15px;
-gap: 10px;
+top: 22px; /* Aligns with Home Icon Row */
+right: 10px;
+gap: 8px; /* Reduced gap */
 }
 .nav-link {
-font-size: 11px;
-font-weight: 400;
+font-size: 9px; /* Smaller font to fit */
+font-weight: 700; /* Bolder for readability */
 }
 }
 
@@ -1652,7 +1655,7 @@ margin: 20px auto;
 </div>
 </div>
 
-<!-- ================= MINI STICKY HEADER ================= -->
+<!-- ================= MINI STICKY HEADER (NO CONTACT/ABOUT) ================= -->
 <div id="miniStickyHeader" class="mini-header">
 <div class="mini-header-top">
 <!-- CONTROLS (LEFT) -->
@@ -1663,17 +1666,13 @@ margin: 20px auto;
 </div>
 </div>
 
-<!-- CATEGORY BAR REMOVED - SPACE IS CLEAN NOW -->
-
-<!-- MINI MENU (RIGHT - UPDATED) -->
+<!-- MINI MENU (RIGHT - CATEGORIES ONLY) -->
 <div class="mini-menu-wrapper">
 <button id="miniMenuBtn" class="mini-menu-btn" title="Menu">☰</button>
 <div id="miniMenuDropdown" class="mini-menu-dropdown">
 <!-- CATEGORIES WILL BE INJECTED HERE BY JS -->
 <div id="miniMenuCategoryList"></div>
-<div class="menu-separator"></div>
-<div class="mini-menu-link" onclick="openAboutPage(); closeMiniMenu();">About Us</div>
-<div class="mini-menu-link" onclick="openContactPage(); closeMiniMenu();">Contact Us</div>
+<!-- About/Contact Us Removed from Mini Menu -->
 </div>
 </div>
 </div>
@@ -1687,7 +1686,7 @@ margin: 20px auto;
 </div>
 </div>
 
-<!-- 0.5 NAVIGATION LINKS (TOP RIGHT FIXED) -->
+<!-- 0.5 NAVIGATION LINKS (TOP RIGHT FIXED - LANDING PAGE ONLY) -->
 <div class="nav-links-wrapper">
 <a href="#" class="nav-link" onclick="openAboutPage(); return false;">About Us</a>
 <a href="#" class="nav-link" onclick="openContactPage(); return false;">Contact Us</a>

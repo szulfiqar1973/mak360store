@@ -106,11 +106,9 @@ align-items: center;
 position: relative;
 padding: 0 10px;
 border-bottom:1px solid #222;
-/* Added justify-content: space-between to separate left/right controls */
-justify-content: space-between; 
+justify-content: space-between;
 }
 
-/* PIN CONTROLS TO LEFT */
 .top-controls-wrapper-mini {
 display: flex;
 gap: 10px;
@@ -148,29 +146,27 @@ color: #fff;
 
 .mini-menu-dropdown {
 position: absolute;
-top: 40px; /* Just below the button */
+top: 40px;
 right: 0;
 background-color: #fff;
-width: 220px; /* Wider for categories */
+width: 220px;
 border-radius: 8px;
 box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-display: none; /* Hidden by default */
+display: none;
 flex-direction: column;
 overflow: hidden;
 border: 1px solid #ddd;
 animation: fadeInMenu 0.2s ease-out;
-/* Make it scrollable if list is long */
 max-height: 70vh;
 overflow-y: auto;
 }
 
-/* Custom Scrollbar for Menu */
 .mini-menu-dropdown::-webkit-scrollbar {
-    width: 6px;
+width: 6px;
 }
 .mini-menu-dropdown::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 3px;
+background-color: #ccc;
+border-radius: 3px;
 }
 
 @keyframes fadeInMenu { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
@@ -207,7 +203,6 @@ font-weight: 800;
 box-shadow: inset 2px 0 0 #000;
 }
 
-/* Category Separator in Menu */
 .menu-separator {
 height: 1px;
 background-color: #eee;
@@ -231,7 +226,6 @@ z-index: 10;
 transition: height 0.3s ease;
 }
 
-/* --- HOME & RELOAD BUTTONS WRAPPER (TOP LEFT FIXED) --- */
 .top-controls-wrapper {
 position: fixed;
 top: 20px;
@@ -243,7 +237,7 @@ transition: opacity 0.3s;
 }
 
 body.has-mini-header .top-controls-wrapper {
-opacity: 0; /* Hide main controls when mini header is up */
+opacity: 0;
 pointer-events: none;
 }
 
@@ -273,7 +267,6 @@ gap: 15px;
 transition: opacity 0.3s;
 }
 
-/* Hide links when mini header appears */
 body.has-mini-header .nav-links-wrapper {
 opacity: 0;
 pointer-events: none;
@@ -281,8 +274,8 @@ pointer-events: none;
 
 .nav-link {
 font-size: 13px;
-font-weight: 300; 
-color: #000000; 
+font-weight: 300;
+color: #000000;
 text-decoration: none;
 text-transform: uppercase;
 letter-spacing: 0.5px;
@@ -291,9 +284,8 @@ transition: all 0.3s ease;
 position: relative;
 }
 
-/* Hover effect */
 .nav-link:hover {
-color: #FFD700; 
+color: #FFD700;
 }
 
 .nav-link::after {
@@ -312,10 +304,9 @@ width: 100%;
 left: 0;
 }
 
-/* Mobile adjustment */
 @media(max-width: 600px) {
 .nav-links-wrapper {
-top: 70px; 
+top: 70px;
 right: 15px;
 gap: 10px;
 }
@@ -331,8 +322,6 @@ justify-content: center;
 align-items: center;
 width: 100%;
 flex-direction: column;
-/* Ensure wrapper doesn't stretch full height if we want marquee separate */
-height: auto; 
 }
 
 .hero-group {
@@ -343,7 +332,6 @@ text-align: center;
 max-width: 100%;
 }
 
-/* --- LOGO BOX STYLES --- */
 .logo-box {
 display: flex;
 align-items: center;
@@ -377,7 +365,6 @@ animation: rotateIn 4s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.3s;
 .top-line { animation: slideInLeft 0.8s ease-out forwards 4.3s; }
 .bottom-line { animation: slideInRight 0.8s ease-out forwards 4.3s; }
 
-/* --- LETS SHOP BUTTON --- */
 .lets-shop-btn {
 margin-top: 30px;
 padding: 12px 30px;
@@ -433,17 +420,10 @@ box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4) !important;
 }
 
 /* ========================================= */
-/* MARQUEE STYLES (UPDATED POSITIONING)
+/* MARQUEE STYLES
 /* ========================================= */
 .marquee-wrapper {
-/* 
-   POSITIONING UPDATE:
-   We removed 'margin-top: 20px'. 
-   Added 'margin-top: 8vh'. This creates a responsive gap that pushes 
-   the marquee down towards the bottom, effectively centering it 
-   between the button (center) and the bottom edge (100vh).
-*/
-margin-top: 8vh; 
+margin-top: 20px;
 width: 100%;
 height: 160px;
 overflow: hidden;
@@ -753,7 +733,7 @@ font-weight: 500;
 display: flex;
 justify-content: space-between;
 width: calc(100% - 40px);
-margin: 15px auto 10px; 
+margin: 15px auto 10px;
 font-size: 11px;
 color: #888;
 font-weight: 600;
@@ -805,7 +785,7 @@ letter-spacing: 0.5px;
 display: flex;
 gap: 12px;
 width: calc(100% - 40px);
-margin: 5px auto 0px auto; 
+margin: 5px auto 0px auto;
 align-items: center;
 margin-top: auto;
 }
@@ -1058,7 +1038,7 @@ left: 0;
 width: 100%;
 height: 100%;
 background-color: #000000;
-z-index: 200000; 
+z-index: 200000;
 flex-direction: column;
 overflow-y: auto;
 opacity: 0;
@@ -1333,7 +1313,7 @@ border-radius: 8px;
 font-size: 1rem;
 font-family: inherit;
 transition: border-color 0.3s, box-shadow 0.3s;
-box-sizing: border-box; 
+box-sizing: border-box;
 }
 
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
@@ -1419,7 +1399,7 @@ overflow: hidden;
 margin-bottom: 20px;
 flex-shrink: 0;
 transition: height 0.3s ease;
-border: 1px solid #000; 
+border: 1px solid #000;
 }
 .modal-cardMedia img, .modal-cardMedia video, .modal-cardMedia .textSlide {
 width: 100%;
@@ -1642,7 +1622,6 @@ height: 65px;
 height: 45px;
 }
 
-/* About Page Mobile Tweaks */
 .about-title {
 font-size: 1.8rem;
 }
@@ -1651,7 +1630,6 @@ width: 85%;
 margin: 20px auto;
 }
 
-/* Contact Page Mobile Tweaks */
 .contact-title {
 font-size: 1.8rem;
 }
@@ -1734,12 +1712,11 @@ margin: 20px auto;
 <span>Let's Shop</span>
 <span class="lets-shop-arrow">▼</span>
 </button>
-</div>
-</div>
 
-<!-- MARQUEE MOVED HERE: Now a sibling of hero-wrapper, centered in lower space -->
 <div class="marquee-wrapper">
 <div id="marqueeTrack" class="marquee-track">
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2505,7 +2482,6 @@ shareBtn.classList.remove('hidden');
 /* UPDATED: RENDER CATEGORY BAR INTO MENU
 /* ========================================= */
 function renderCategoryBar() {
-// Now targeting the Mini Menu List Container
 const listContainer = document.getElementById("miniMenuCategoryList");
 if(!listContainer) return;
 
@@ -2525,7 +2501,7 @@ div.className = "mini-menu-link" + (currentCategoryFilter === cat.name ? " activ
 div.innerText = cat.name;
 div.onclick = function() {
 switchView(cat.name);
-closeMiniMenu(); // Close menu when category selected
+closeMiniMenu();
 };
 listContainer.appendChild(div);
 }
@@ -2534,8 +2510,7 @@ listContainer.appendChild(div);
 
 function switchView(catName) {
 currentCategoryFilter = catName;
-// Update active state in mini menu
-renderCategoryBar(); 
+renderCategoryBar();
 playClickSound();
 renderStore();
 const y = document.getElementById('productContainer').getBoundingClientRect().top + window.pageYOffset - 90;
@@ -2543,70 +2518,52 @@ window.scrollTo({top: y, behavior: 'smooth'});
 }
 
 /* ========================================= */
-/* UNIFIED PAGE NAVIGATION LOGIC (INSTANT SWITCH)
+/* UPDATED PAGE NAVIGATION LOGIC (CENTER ROW)
 /* ========================================= */
+
 // Define all overlay IDs
 const overlayPages = ['aboutPage', 'contactPage'];
 
 // Function to close all overlays INSTANTLY
 function closeAllOverlays() {
-    overlayPages.forEach(pageId => {
-        const el = document.getElementById(pageId);
-        if (el) {
-            el.classList.remove('active');
-            el.style.display = 'none'; 
-        }
-    });
-    // Restore body scroll if no modal is open
-    if (!document.getElementById("orderModal").classList.contains('active')) {
-        document.body.style.overflow = 'auto';
-    }
+overlayPages.forEach(pageId => {
+const el = document.getElementById(pageId);
+if (el) {
+el.classList.remove('active');
+el.style.display = 'none';
+}
+});
+if (!document.getElementById("orderModal").classList.contains('active')) {
+document.body.style.overflow = 'auto';
+}
 }
 
 // Function to open a specific overlay INSTANTLY
 function openOverlay(pageId) {
-    playClickSound();
-    
-    // 1. Close all others immediately
-    closeAllOverlays();
-
-    // 2. Open target immediately
-    const target = document.getElementById(pageId);
-    if (target) {
-        target.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        
-        // Small timeout to allow 'display: flex' to render before opacity transition
-        setTimeout(() => {
-            target.classList.add('active');
-        }, 10);
-    }
+playClickSound();
+closeAllOverlays();
+const target = document.getElementById(pageId);
+if (target) {
+target.style.display = 'flex';
+document.body.style.overflow = 'hidden';
+setTimeout(() => {
+target.classList.add('active');
+}, 10);
+}
 }
 
-// Updating individual functions to use unified logic
-function openAboutPage() {
-    openOverlay('aboutPage');
-}
-
-function openContactPage() {
-    openOverlay('contactPage');
-}
-
-// Close functions now just call to unified closer
+function openAboutPage() { openOverlay('aboutPage'); }
+function openContactPage() { openOverlay('contactPage'); }
 function closeAboutPage() { closeAllOverlays(); }
 function closeContactPage() { closeAllOverlays(); }
 
 function resetToAll() {
-    // Close all overlays instantly
-    closeAllOverlays();
-
-    // Close Order Modal if open
-    var modal = document.getElementById("orderModal");
-    if(modal.classList.contains('active')) closeModal();
-    
-    localStorage.removeItem(STORAGE_KEY);
-    window.scrollTo({ top: 0, behavior: 'auto' });
-    switchView('All');
+closeAllOverlays();
+var modal = document.getElementById("orderModal");
+if(modal.classList.contains('active')) closeModal();
+localStorage.removeItem(STORAGE_KEY);
+window.scrollTo({ top: 0, behavior: 'auto' });
+switchView('All');
 }
 
 function forceHardReset() {
@@ -2708,70 +2665,126 @@ if(modal.classList.contains('active')) return;
 var cards = Array.from(document.querySelectorAll(".productCard"));
 if(cards.length === 0) return;
 isNavigating = true;
-var currentCardIndex = -1;
-var minDistance = 99999;
-const viewportCheck = getScrollY() + 20;
+
+const viewportHeight = window.innerHeight;
+const cardHeight = cards[0].offsetHeight; // Assumption: cards are uniform height
+const cols = getColumns();
+
+// 1. Identify the row currently closest to center
+let centerOfViewport = window.scrollY + (viewportHeight / 2);
+let currentCenterIndex = 0;
+let minDistance = Infinity;
+
 cards.forEach((card, index) => {
-var rect = card.getBoundingClientRect();
-var cardAbsoluteTop = window.scrollY + rect.top;
-var distance = Math.abs(viewportCheck - cardAbsoluteTop);
-if (rect.bottom > 0 && rect.top < window.innerHeight) {
+const cardCenter = window.scrollY + card.getBoundingClientRect().top + (cardHeight / 2);
+const distance = Math.abs(cardCenter - centerOfViewport);
 if (distance < minDistance) {
 minDistance = distance;
-currentCardIndex = index;
-}
+currentCenterIndex = index;
 }
 });
-if (currentCardIndex === -1) currentCardIndex = 0;
-let cols = getColumns();
-let targetIndex = -1;
-if (direction === 'down') {
-targetIndex = currentCardIndex + cols;
-if (targetIndex < cards.length) {
-let targetRect = cards[targetIndex].getBoundingClientRect();
-let targetAbsoluteTop = window.scrollY + targetRect.top;
-let scrollTarget = targetAbsoluteTop - 20;
-window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
-playClickSound();
+
+// 2. Find the first card in the CURRENT row
+// We look backwards from the centered card until the 'top' position changes
+let firstCardOfCurrentRow = currentCenterIndex;
+const currentRowTop = cards[firstCardOfCurrentRow].getBoundingClientRect().top + window.scrollY;
+
+while (firstCardOfCurrentRow > 0) {
+const prevCardTop = cards[firstCardOfCurrentRow - 1].getBoundingClientRect().top + window.scrollY;
+// If previous card is roughly on the same row (allow small pixel diff for borders/gaps)
+if (Math.abs(prevCardTop - currentRowTop) < 10) {
+firstCardOfCurrentRow--;
 } else {
-window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+break;
+}
+}
+
+// 3. Determine the target row's first card index
+let firstCardOfTargetRow = firstCardOfCurrentRow;
+
+if (direction === 'down') {
+firstCardOfTargetRow = firstCardOfCurrentRow + cols;
+// Bound check: If we go past the end, clamp to the last card (effectively centering the last row)
+if (firstCardOfTargetRow >= cards.length) {
+firstCardOfTargetRow = cards.length - 1;
 }
 } else if (direction === 'up') {
-if (currentCardIndex === 0) {
-window.scrollTo({ top: 0, behavior: 'smooth' });
-playClickSound();
-return;
+firstCardOfTargetRow = firstCardOfCurrentRow - cols;
+// Bound check: If we go before the start, clamp to 0
+if (firstCardOfTargetRow < 0) {
+firstCardOfTargetRow = 0;
 }
-let prevIndex = currentCardIndex - cols;
-if (prevIndex < 0) prevIndex = 0;
-let targetRect = cards[prevIndex].getBoundingClientRect();
-let targetAbsoluteTop = window.scrollY + targetRect.top;
-let scrollTarget = targetAbsoluteTop - 20;
-window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
-playClickSound();
 }
+
+// 4. Calculate the vertical position to center this row
+const targetCard = cards[firstCardOfTargetRow];
+const targetRowTop = targetCard.getBoundingClientRect().top + window.scrollY;
+
+// Formula to center the row: RowTop - HalfWindowHeight + HalfCardHeight
+let scrollToY = targetRowTop - (viewportHeight / 2) + (cardHeight / 2);
+
+// Smooth scroll
+window.scrollTo({ top: scrollToY, behavior: 'smooth' });
+playClickSound();
+
 setTimeout(() => {
-localStorage.setItem(STORAGE_KEY, window.scrollY);
+localStorage.setItem(STORAGE_KEY, scrollToY);
 isNavigating = false;
 }, 800);
 }
 
 function updateNavButtons() {
-const navUp = document.getElementById('navUp'); const navDown = document.getElementById('navDown');
+const navUp = document.getElementById('navUp');
+const navDown = document.getElementById('navDown');
 const cards = Array.from(document.querySelectorAll(".productCard"));
+
 if (cards.length === 0) return;
-let currentCenterCardIndex = -1; let viewportCenter = window.innerHeight / 2; let minDistance = 99999;
+
+const viewportHeight = window.innerHeight;
+const cardHeight = cards[0].offsetHeight;
+const cols = getColumns();
+
+// Find the row currently centered in the viewport
+let centerOfViewport = window.scrollY + (viewportHeight / 2);
+let currentCenterIndex = 0;
+let minDist = Infinity;
+
 cards.forEach((card, index) => {
-let rect = card.getBoundingClientRect();
-let cardCenter = rect.top + (rect.height / 2);
-let distance = Math.abs(viewportCenter - cardCenter);
-if (rect.top < window.innerHeight && rect.bottom > 0) {
-if (distance < minDistance) { minDistance = distance; currentCenterCardIndex = index; }
+const cardCenter = window.scrollY + card.getBoundingClientRect().top + (cardHeight / 2);
+const dist = Math.abs(cardCenter - centerOfViewport);
+if (dist < minDist) {
+minDist = dist;
+currentCenterIndex = index;
 }
 });
-if (currentCenterCardIndex === -1) { navUp.classList.add('disabled'); navDown.classList.remove('disabled'); return; }
-if (currentCenterCardIndex === 0) { navUp.classList.remove('disabled'); } else { navUp.classList.remove('disabled'); }
-if (currentCenterCardIndex === cards.length -1) { navDown.classList.add('disabled'); } else { navDown.classList.remove('disabled'); }
+
+// Find first card of current centered row
+let firstOfCurrentRow = currentCenterIndex;
+const currentRowTop = cards[firstOfCurrentRow].getBoundingClientRect().top + window.scrollY;
+
+while(firstOfCurrentRow > 0) {
+const prevRowTop = cards[firstOfCurrentRow - 1].getBoundingClientRect().top + window.scrollY;
+if (Math.abs(prevRowTop - currentRowTop) < 10) {
+firstOfCurrentRow--;
+} else {
+break;
+}
+}
+
+// Check Bounds
+// If the first card of the centered row is 0, we can't go up
+if (firstOfCurrentRow === 0) {
+navUp.classList.add('disabled');
+} else {
+navUp.classList.remove('disabled');
+}
+
+// If (FirstCardIndex + Cols) >= total cards, we are at or past the last row
+if (firstOfCurrentRow + cols >= cards.length) {
+navDown.classList.add('disabled');
+} else {
+navDown.classList.remove('disabled');
+}
 }
 
 function getColumns() {
@@ -2905,23 +2918,22 @@ const miniMenuBtn = document.getElementById('miniMenuBtn');
 const miniMenuDropdown = document.getElementById('miniMenuDropdown');
 
 if (miniMenuBtn && miniMenuDropdown) {
-    miniMenuBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        miniMenuDropdown.classList.toggle('active');
-    });
+miniMenuBtn.addEventListener('click', (e) => {
+e.stopPropagation();
+miniMenuDropdown.classList.toggle('active');
+});
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!miniMenuDropdown.contains(e.target) && !miniMenuBtn.contains(e.target)) {
-            miniMenuDropdown.classList.remove('active');
-        }
-    });
+document.addEventListener('click', (e) => {
+if (!miniMenuDropdown.contains(e.target) && !miniMenuBtn.contains(e.target)) {
+miniMenuDropdown.classList.remove('active');
+}
+});
 }
 
 function closeMiniMenu() {
-    if (miniMenuDropdown) {
-        miniMenuDropdown.classList.remove('active');
-    }
+if (miniMenuDropdown) {
+miniMenuDropdown.classList.remove('active');
+}
 }
 
 let currentModalProduct = null;
@@ -3102,8 +3114,8 @@ document.getElementById('contactPhone').value = "";
 document.getElementById('contactMessage').value = "";
 
 setTimeout(() => {
-closeAllOverlays(); 
-resetToAll(); 
+closeAllOverlays();
+resetToAll();
 }, 2000);
 })
 .catch(error => {

@@ -229,7 +229,6 @@ flex-direction: column;
 position: relative;
 z-index: 10;
 transition: height 0.3s ease;
-padding-bottom: 160px; /* Space for marquee */
 }
 
 /* --- HOME & RELOAD BUTTONS WRAPPER (TOP LEFT FIXED) --- */
@@ -332,7 +331,6 @@ justify-content: center;
 align-items: center;
 width: 100%;
 flex-direction: column;
-margin-bottom: 20px; /* Added margin to separate from marquee */
 }
 
 .hero-group {
@@ -433,28 +431,16 @@ box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4) !important;
 }
 
 /* ========================================= */
-/* MARQUEE STYLES (UPDATED FOR BOTTOM POSITION)
+/* MARQUEE STYLES
 /* ========================================= */
 .marquee-wrapper {
-/* Layout: Fixed to bottom of cover container */
-position: absolute;
-bottom: 0;
-left: 0;
+margin-top: 20px;
 width: 100%;
-z-index: 5; /* Below buttons, above background */
-
-/* Dimensions */
 height: 160px;
 overflow: hidden;
+position: relative;
 display: flex;
 align-items: center;
-margin-top: 0; /* Reset margin */
-
-/* Visuals */
-background: linear-gradient(to top, #ffffff 40%, rgba(255,255,255,0));
-padding-bottom: 10px;
-
-/* Animation */
 opacity: 0;
 animation: fadeInUp 1s ease forwards 5.0s;
 }
@@ -1739,15 +1725,13 @@ margin: 20px auto;
 <span>Let's Shop</span>
 <span class="lets-shop-arrow">▼</span>
 </button>
-</div>
-</div>
 
-<!-- MARQUEE WRAPPER MOVED TO BOTTOM OF COVER CONTAINER -->
 <div class="marquee-wrapper">
 <div id="marqueeTrack" class="marquee-track">
 </div>
 </div>
-
+</div>
+</div>
 </div>
 
 <div class="page-nav-wrapper">

@@ -83,7 +83,7 @@ height: 100%;
 }
 
 /* ========================================= */
-/* NEW MINI STICKY HEADER (CENTER ADJUSTED)
+/* NEW MINI STICKY HEADER
 /* ========================================= */
 .mini-header {
 display: none;
@@ -106,14 +106,12 @@ align-items: center;
 position: relative;
 padding: 0 10px;
 border-bottom:1px solid #222;
+/* Added justify-content: space-between to separate left/right controls */
+justify-content: space-between; 
 }
 
 /* PIN CONTROLS TO LEFT */
 .top-controls-wrapper-mini {
-position: absolute;
-left: 10px;
-top: 50%;
-transform: translateY(-50%);
 display: flex;
 gap: 10px;
 align-items: center;
@@ -122,13 +120,10 @@ flex-shrink: 0;
 }
 
 /* ========================================= */
-/* NEW: MINI MENU BUTTON (FIXED ACCESSIBILITY ISSUE)
+/* UPDATED MINI MENU (CATEGORIES ADDED)
 /* ========================================= */
 .mini-menu-wrapper {
-position: absolute;
-right: 10px;
-top: 50%;
-transform: translateY(-50%);
+position: relative;
 z-index: 10;
 }
 
@@ -156,7 +151,7 @@ position: absolute;
 top: 40px; /* Just below the button */
 right: 0;
 background-color: #fff;
-width: 160px;
+width: 220px; /* Wider for categories */
 border-radius: 8px;
 box-shadow: 0 5px 20px rgba(0,0,0,0.3);
 display: none; /* Hidden by default */
@@ -164,6 +159,18 @@ flex-direction: column;
 overflow: hidden;
 border: 1px solid #ddd;
 animation: fadeInMenu 0.2s ease-out;
+/* Make it scrollable if list is long */
+max-height: 70vh;
+overflow-y: auto;
+}
+
+/* Custom Scrollbar for Menu */
+.mini-menu-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+.mini-menu-dropdown::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
 }
 
 @keyframes fadeInMenu { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
@@ -192,24 +199,19 @@ background-color: #FFD700;
 color: #000;
 }
 
-/* CATEGORY BAR - PERFECTLY CENTERED */
-.cat-bar-wrapper {
-/* ABSOLUTE CENTERING LOGIC */
-position: absolute;
-left: 50%;
-top: 50%;
-transform: translate(-50%, -50%);
+.mini-menu-link.active {
+background-color: #FFD700;
+color: #000;
+border-color: #FFD700;
+font-weight: 800;
+box-shadow: inset 2px 0 0 #000;
+}
 
-display: flex;
-align-items: center;
-height: 34px;
-max-width: 320px; /* Max width for aesthetic pill shape */
-width: auto;
-background-color: #000;
-position: relative;
-overflow: hidden;
-border-radius: 20px;
-z-index: 2;
+/* Category Separator in Menu */
+.menu-separator {
+height: 1px;
+background-color: #eee;
+margin: 5px 0;
 }
 
 /* ========================================= */
@@ -258,7 +260,7 @@ transition: all 0.3s ease;
 .home-btn-wrapper svg { width: 24px; height: 24px; color: #000; }
 
 /* ========================================= */
-/* NEW: TOP RIGHT NAVIGATION LINKS
+/* TOP RIGHT NAVIGATION LINKS
 /* ========================================= */
 .nav-links-wrapper {
 position: fixed;
@@ -271,7 +273,7 @@ gap: 15px;
 transition: opacity 0.3s;
 }
 
-/* Hide links when mini header appears (scrolling) to keep UI clean */
+/* Hide links when mini header appears */
 body.has-mini-header .nav-links-wrapper {
 opacity: 0;
 pointer-events: none;
@@ -279,8 +281,8 @@ pointer-events: none;
 
 .nav-link {
 font-size: 13px;
-font-weight: 300; /* Thin font */
-color: #000000; /* Black font */
+font-weight: 300; 
+color: #000000; 
 text-decoration: none;
 text-transform: uppercase;
 letter-spacing: 0.5px;
@@ -289,9 +291,9 @@ transition: all 0.3s ease;
 position: relative;
 }
 
-/* Hover effect: Color change + Underline */
+/* Hover effect */
 .nav-link:hover {
-color: #FFD700; /* Brand Gold on hover */
+color: #FFD700; 
 }
 
 .nav-link::after {
@@ -313,7 +315,7 @@ left: 0;
 /* Mobile adjustment */
 @media(max-width: 600px) {
 .nav-links-wrapper {
-top: 70px; /* Move down on mobile to avoid logo overlap */
+top: 70px; 
 right: 15px;
 gap: 10px;
 }
@@ -339,7 +341,7 @@ text-align: center;
 max-width: 100%;
 }
 
-/* --- RESTORED LOGO BOX STYLES --- */
+/* --- LOGO BOX STYLES --- */
 .logo-box {
 display: flex;
 align-items: center;
@@ -429,7 +431,7 @@ box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4) !important;
 }
 
 /* ========================================= */
-/* MARQUEE STYLES (UPDATED PRICE)
+/* MARQUEE STYLES
 /* ========================================= */
 .marquee-wrapper {
 margin-top: 20px;
@@ -511,105 +513,6 @@ animation-play-state: paused;
 }
 
 /* ========================================= */
-/* CATEGORY NAVIGATION (UPDATED - SMALLER)
-/* ========================================= */
-.category-track {
-display: flex;
-gap: 8px;
-overflow-x: auto;
-white-space: nowrap;
-width: 100%;
-padding: 0 30px; /* Adjusted for arrows */
-height: 100%;
-align-items: center;
-scroll-behavior: smooth;
-scrollbar-width: none;
--ms-overflow-style: none;
-}
-.category-track::-webkit-scrollbar { display: none; }
-
-/* ========================================= */
-/* UPDATED CATEGORY BOX STYLES (SMALLER)
-/* ========================================= */
-.cat-link {
-font-size: 9px; /* Reduced font size */
-font-weight: 600;
-text-transform: uppercase;
-letter-spacing: 0.5px;
-color: #ffffff;
-cursor: pointer;
-padding: 3px 8px; /* Reduced padding */
-border-radius: 4px;
-border: 1px solid rgba(255,255,255,0.2);
-background-color: rgba(255, 255, 255, 0.15);
-transition: all 0.3s ease;
-position: relative;
-flex-shrink: 0;
-white-space: nowrap;
-display: flex;
-align-items: center;
-justify-content: center;
-text-align: center;
-}
-
-.cat-link:hover {
-background-color: #FFD700;
-color: #000000;
-border-color: #FFD700;
-transform: translateY(-1px);
-}
-
-.cat-link.active {
-background-color: #FFD700;
-color: #000000;
-border-color: #FFD700;
-font-weight: 800;
-box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-}
-
-/* ========================================= */
-/* SCROLL BUTTONS (UPDATED FOR WRAPPER)
-/* ========================================= */
-.cat-scroll-btn {
-position: absolute;
-top: 0;
-bottom: 0;
-width: 30px;
-height: 100%;
-border: none;
-background: rgba(0, 0, 0, 0.6);
-color: #FFD700;
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: pointer;
-font-size: 16px;
-transition: all 0.3s ease;
-z-index: 5;
-pointer-events: auto;
-backdrop-filter: blur(2px);
-}
-
-#catPrevBtn {
-left: 0;
-background: linear-gradient(to right, rgba(0,0,0,0.9), transparent);
-border-radius: 20px 0 0 20px;
-}
-
-#catNextBtn {
-right: 0;
-background: linear-gradient(to left, rgba(0,0,0,0.9), transparent);
-border-radius: 0 20px 20px 0;
-}
-
-.cat-scroll-btn:hover {
-color: #fff;
-background: rgba(0, 0, 0, 0.8);
-font-weight: bold;
-transform: scale(1.1);
-}
-
-/* ========================================= */
 /* PAGE NAVIGATION (RIGHT BOTTOM)
 /* ========================================= */
 .page-nav-wrapper {
@@ -657,7 +560,7 @@ background-color: #ccc;
 }
 
 /* ========================================= */
-/* PRODUCT STORE STYLES (UPDATED BORDER)
+/* PRODUCT STORE STYLES
 /* ========================================= */
 #productContainer {
 display:flex;
@@ -674,7 +577,6 @@ background:#f8f9fa;
 width: 90%;
 max-width: 320px;
 min-height: 500px;
-/* UPDATED: BLACK THIN BORDER */
 border: 1px solid #000000;
 border-radius: 20px;
 background:#fff;
@@ -702,9 +604,9 @@ overflow: hidden;
 flex-shrink: 0;
 transition: height 0.3s ease;
 border-bottom: 1px solid #f0f0f0;
-border-top-left-radius: 19px; /* Match card radius minus border */
+border-top-left-radius: 19px;
 border-top-right-radius: 19px;
-border-top: 1px solid #000000; /* Match card border */
+border-top: 1px solid #000000;
 }
 
 .cardMedia img, .cardMedia video {
@@ -720,7 +622,7 @@ transform: scale(1.08);
 }
 
 /* ========================================= */
-/* ZOOM BUTTON STYLES (FIXED - HIGH Z-INDEX)
+/* ZOOM BUTTON STYLES
 /* ========================================= */
 .zoomBtn {
 position: absolute;
@@ -736,7 +638,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 cursor: pointer;
-z-index: 50; /* Increased z-index to be on top of everything */
+z-index: 50;
 transition: all 0.2s;
 backdrop-filter: blur(2px);
 opacity: 0.7;
@@ -755,7 +657,7 @@ pointer-events: none;
 }
 
 /* ========================================= */
-/* ALWAYS VISIBLE ARROWS
+/* ARROWS
 /* ========================================= */
 .leftArrow, .rightArrow {
 position:absolute;
@@ -767,7 +669,7 @@ padding:10px 14px;
 border-radius:50%;
 font-size: 18px;
 cursor:pointer;
-z-index: 20; /* Lower than Zoom Button */
+z-index: 20;
 font-weight: bold;
 backdrop-filter: blur(4px);
 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -837,12 +739,11 @@ font-size: 13px;
 font-weight: 500;
 }
 
-/* NEW STYLES FOR INTERNAL CODES */
+/* STYLES FOR INTERNAL CODES */
 .internal-codes {
 display: flex;
 justify-content: space-between;
 width: calc(100% - 40px);
-/* UPDATED MARGIN: Added top margin to separate from buttons above */
 margin: 15px auto 10px; 
 font-size: 11px;
 color: #888;
@@ -863,7 +764,6 @@ margin: 5px 0 8px;
 flex-wrap: wrap;
 }
 
-/* UPDATED CARD PRICE */
 .current-price {
 font-size: 18px;
 font-weight: 300;
@@ -890,13 +790,13 @@ letter-spacing: 0.5px;
 }
 
 /* ========================================= */
-/* ACTION ROW BUTTONS (ZOOM REMOVED)
+/* ACTION ROW BUTTONS
 /* ========================================= */
 .action-row {
 display: flex;
 gap: 12px;
 width: calc(100% - 40px);
-margin: 5px auto 0px auto; /* Reduced bottom margin to 0 as codes are now below */
+margin: 5px auto 0px auto; 
 align-items: center;
 margin-top: auto;
 }
@@ -950,7 +850,7 @@ transform: translateY(-2px);
 .hidden { display: none !important; }
 
 /* ========================================= */
-/* ZOOM VIEWER OVERLAY STYLES (NEW)
+/* ZOOM VIEWER OVERLAY STYLES
 /* ========================================= */
 #zoomViewer {
 display: none;
@@ -1046,7 +946,7 @@ user-select: none;
 .zoom-next { right: 10px; }
 
 /* ========================================= */
-/* THANK YOU OVERLAY (PROMINENT & ANIMATED)
+/* THANK YOU OVERLAY
 /* ========================================= */
 #thankYouOverlay {
 display: none;
@@ -1139,7 +1039,7 @@ font-weight: 500;
 }
 
 /* ========================================= */
-/* ABOUT US PAGE STYLES (NEW)
+/* ABOUT US PAGE STYLES
 /* ========================================= */
 #aboutPage {
 display: none;
@@ -1149,7 +1049,7 @@ left: 0;
 width: 100%;
 height: 100%;
 background-color: #000000;
-z-index: 200000; /* High z-index to sit on top of everything */
+z-index: 200000; 
 flex-direction: column;
 overflow-y: auto;
 opacity: 0;
@@ -1275,7 +1175,7 @@ color: #000;
 }
 
 /* ========================================= */
-/* CONTACT US PAGE STYLES (UPDATED - FIXED COMMENTS)
+/* CONTACT US PAGE STYLES
 /* ========================================= */
 #contactPage {
 display: none;
@@ -1424,7 +1324,7 @@ border-radius: 8px;
 font-size: 1rem;
 font-family: inherit;
 transition: border-color 0.3s, box-shadow 0.3s;
-box-sizing: border-box; /* Ensure padding doesn't overflow */
+box-sizing: border-box; 
 }
 
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
@@ -1510,7 +1410,7 @@ overflow: hidden;
 margin-bottom: 20px;
 flex-shrink: 0;
 transition: height 0.3s ease;
-border: 1px solid #000; /* Matching card border */
+border: 1px solid #000; 
 }
 .modal-cardMedia img, .modal-cardMedia video, .modal-cardMedia .textSlide {
 width: 100%;
@@ -1623,7 +1523,7 @@ transform: scale(1.02);
 }
 
 /* ========================================= */
-/* HIGHLIGHTED SHIPPING SLIDE STYLES (UPDATED FONT SIZE)
+/* HIGHLIGHTED SHIPPING SLIDE STYLES
 /* ========================================= */
 .shipping-highlight {
 width: 100%;
@@ -1641,7 +1541,6 @@ border-radius: 8px;
 }
 .sh-title {
 color: #FFD700;
-/* Reduced from 18px to 17px for better balance */
 font-size: 17px;
 font-weight: 800;
 text-transform: uppercase;
@@ -1656,7 +1555,6 @@ text-overflow: ellipsis;
 }
 .sh-item {
 margin: 12px 0;
-/* Reduced from 14px to 13px for better balance */
 font-size: 13px;
 color: #ddd;
 line-height: 1.4;
@@ -1665,7 +1563,6 @@ width: 90%;
 .sh-highlight-text {
 color: #FFD700;
 font-weight: bold;
-/* Reduced from 16px to 15px for better balance */
 font-size: 15px;
 display: block;
 margin-bottom: 5px;
@@ -1732,23 +1629,8 @@ width: 110px;
 height: 65px;
 }
 
-/* UPDATED MOBILE HEADER SIZES */
 .mini-header-top {
 height: 45px;
-}
-
-/* On very small screens, ensure category bar doesn't hide left icons completely */
-.cat-bar-wrapper {
-max-width: 55%; /* Responsive width */
-min-width: 180px; /* Ensure text fits */
-}
-.cat-link {
-font-size: 9px;
-padding: 2px 6px;
-}
-.cat-scroll-btn {
-width: 28px;
-font-size: 14px;
 }
 
 /* About Page Mobile Tweaks */
@@ -1769,14 +1651,6 @@ width: 90%;
 margin: 20px auto;
 }
 }
-
-@media(max-width: 380px) {
-.cat-link { font-size: 8px; padding: 2px 5px; }
-.cat-scroll-btn { width: 25px; }
-.cat-bar-wrapper {
-max-width: 50%;
-}
-}
 </style>
 </head>
 
@@ -1794,29 +1668,23 @@ max-width: 50%;
 <!-- ================= MINI STICKY HEADER ================= -->
 <div id="miniStickyHeader" class="mini-header">
 <div class="mini-header-top">
-<!-- CONTROLS (LEFT - ABSOLUTE) -->
+<!-- CONTROLS (LEFT) -->
 <div class="top-controls-wrapper-mini">
-<!-- Home Button now calls forceHardReset instead of resetToAll -->
+<!-- Home Button -->
 <div class="home-btn-wrapper" onclick="forceHardReset()" title="Force Refresh">
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
 </div>
-<!-- Reload button removed as requested -->
 </div>
 
-<!-- CATEGORY BAR (CENTERED ABSOLUTE) -->
-<div class="cat-bar-wrapper">
-<button class="cat-scroll-btn" id="catPrevBtn" aria-label="Previous Categories">&lt;</button>
+<!-- CATEGORY BAR REMOVED - SPACE IS CLEAN NOW -->
 
-<div class="category-track" id="categoryTrack">
-</div>
-
-<button class="cat-scroll-btn" id="catNextBtn" aria-label="Next Categories">&gt;</button>
-</div>
-
-<!-- MINI MENU (RIGHT - FIXED ACCESS) -->
+<!-- MINI MENU (RIGHT - UPDATED) -->
 <div class="mini-menu-wrapper">
 <button id="miniMenuBtn" class="mini-menu-btn" title="Menu">☰</button>
 <div id="miniMenuDropdown" class="mini-menu-dropdown">
+<!-- CATEGORIES WILL BE INJECTED HERE BY JS -->
+<div id="miniMenuCategoryList"></div>
+<div class="menu-separator"></div>
 <div class="mini-menu-link" onclick="openAboutPage(); closeMiniMenu();">About Us</div>
 <div class="mini-menu-link" onclick="openContactPage(); closeMiniMenu();">Contact Us</div>
 </div>
@@ -1826,18 +1694,15 @@ max-width: 50%;
 
 <!-- 0. CONTROLS WRAPPER (TOP LEFT FIXED) -->
 <div class="top-controls-wrapper">
-<!-- Home Button now calls forceHardReset -->
+<!-- Home Button -->
 <div class="home-btn-wrapper" onclick="forceHardReset()" title="Force Refresh">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
 </div>
-<!-- Reload button removed as requested -->
 </div>
 
-<!-- 0.5 NAVIGATION LINKS (TOP RIGHT FIXED - UPDATED) -->
+<!-- 0.5 NAVIGATION LINKS (TOP RIGHT FIXED) -->
 <div class="nav-links-wrapper">
-<!-- About Us Link now calls openAboutPage() -->
 <a href="#" class="nav-link" onclick="openAboutPage(); return false;">About Us</a>
-<!-- Contact Us Link now calls openContactPage() -->
 <a href="#" class="nav-link" onclick="openContactPage(); return false;">Contact Us</a>
 </div>
 
@@ -1951,7 +1816,7 @@ max-width: 50%;
 </div>
 </div>
 
-<!-- ABOUT US PAGE OVERLAY (NEW) -->
+<!-- ABOUT US PAGE OVERLAY -->
 <div id="aboutPage">
 <div class="about-header">
 <!-- Close Button -->
@@ -2003,7 +1868,7 @@ Welcome to MAK360 Store, your trusted destination for quality products and a sea
 </div>
 </div>
 
-<!-- CONTACT US PAGE OVERLAY (NEW) -->
+<!-- CONTACT US PAGE OVERLAY -->
 <div id="contactPage">
 <div class="contact-header">
 <!-- Close Button -->
@@ -2598,7 +2463,7 @@ show();
 playClickSound();
 };
 
-/* ZOOM BUTTON CLICK LOGIC (FIXED) */
+/* ZOOM BUTTON CLICK LOGIC */
 const zoomBtn = card.querySelector(".zoomBtn");
 if (zoomBtn) {
 zoomBtn.onclick = (e) => {
@@ -2626,11 +2491,15 @@ shareBtn.classList.remove('hidden');
 });
 }
 
+/* ========================================= */
+/* UPDATED: RENDER CATEGORY BAR INTO MENU
+/* ========================================= */
 function renderCategoryBar() {
-const track = document.getElementById("categoryTrack");
-if(!track) return;
+// Now targeting the Mini Menu List Container
+const listContainer = document.getElementById("miniMenuCategoryList");
+if(!listContainer) return;
 
-track.innerHTML = "";
+listContainer.innerHTML = "";
 const sortedCats = [...categories].sort((a, b) => {
 if(a.name === "All") return -1;
 if(b.name === "All") return 1;
@@ -2641,24 +2510,22 @@ return orderA - orderB;
 
 sortedCats.forEach(cat => {
 if(cat.visible) {
-const span = document.createElement("span");
-span.className = "cat-link" + (currentCategoryFilter === cat.name ? " active" : "");
-span.dataset.cat = cat.name;
-span.innerText = cat.name;
-span.onclick = function() {
+const div = document.createElement("div");
+div.className = "mini-menu-link" + (currentCategoryFilter === cat.name ? " active" : "");
+div.innerText = cat.name;
+div.onclick = function() {
 switchView(cat.name);
+closeMiniMenu(); // Close menu when category selected
 };
-track.appendChild(span);
+listContainer.appendChild(div);
 }
 });
 }
 
 function switchView(catName) {
 currentCategoryFilter = catName;
-const links = document.querySelectorAll(".cat-link");
-links.forEach(l => l.classList.remove("active"));
-const activeLink = document.querySelector(`.cat-link[data-cat="${catName}"]`);
-if(activeLink) activeLink.classList.add("active");
+// Update active state in mini menu
+renderCategoryBar(); 
 playClickSound();
 renderStore();
 const y = document.getElementById('productContainer').getBoundingClientRect().top + window.pageYOffset - 90;
@@ -2666,7 +2533,7 @@ window.scrollTo({top: y, behavior: 'smooth'});
 }
 
 /* ========================================= */
-/* NEW: UNIFIED PAGE NAVIGATION LOGIC (INSTANT SWITCH)
+/* UNIFIED PAGE NAVIGATION LOGIC (INSTANT SWITCH)
 /* ========================================= */
 // Define all overlay IDs
 const overlayPages = ['aboutPage', 'contactPage'];
@@ -2677,7 +2544,6 @@ function closeAllOverlays() {
         const el = document.getElementById(pageId);
         if (el) {
             el.classList.remove('active');
-            // Force display:none immediately to remove fade-out delay
             el.style.display = 'none'; 
         }
     });
@@ -2691,7 +2557,7 @@ function closeAllOverlays() {
 function openOverlay(pageId) {
     playClickSound();
     
-    // 1. Close all others immediately (removes previous page instantly)
+    // 1. Close all others immediately
     closeAllOverlays();
 
     // 2. Open target immediately
@@ -2914,7 +2780,7 @@ break;
 return cols;
 }
 
-/* ================= ZOOM VIEWER LOGIC (NEW) ================= */
+/* ================= ZOOM VIEWER LOGIC ================= */
 let zoomSlides = [];
 let currentZoomIndex = 0;
 
@@ -3022,24 +2888,8 @@ let text = `Hey! Check out this product:\n\n*${shareTitle}*\nPrice: ${sharePrice
 window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
 }
 
-const catPrevBtn = document.getElementById("catPrevBtn");
-const catNextBtn = document.getElementById("catNextBtn");
-const categoryTrack = document.getElementById("categoryTrack");
-if(catPrevBtn) {
-catPrevBtn.addEventListener('click', () => {
-categoryTrack.scrollBy({ left: -150, behavior: 'smooth' });
-playClickSound();
-});
-}
-if(catNextBtn) {
-catNextBtn.addEventListener('click', () => {
-categoryTrack.scrollBy({ left: 150, behavior: 'smooth' });
-playClickSound();
-});
-}
-
 /* ========================================= */
-/* MINI MENU LOGIC (FIXED ACCESSIBILITY)
+/* MINI MENU LOGIC
 /* ========================================= */
 const miniMenuBtn = document.getElementById('miniMenuBtn');
 const miniMenuDropdown = document.getElementById('miniMenuDropdown');
@@ -3196,28 +3046,24 @@ showToast("Navigating to " + pageName + "...");
 }
 
 /* ========================================= */
-/* CONTACT US PAGE LOGIC (UPDATED)
+/* CONTACT US PAGE LOGIC
 /* ========================================= */
 function submitContactForm() {
-// 1. Get Values
 const name = document.getElementById('contactName').value.trim();
 const email = document.getElementById('contactEmail').value.trim();
 const phone = document.getElementById('contactPhone').value.trim();
 const message = document.getElementById('contactMessage').value.trim();
 
-// 2. Basic Validation
 if (!name || !email || !phone || !message) {
 showToast("Please fill in all fields.");
 return;
 }
 
-// 3. Disable Button to prevent double submit
 const btn = document.querySelector('.contact-submit-btn');
 const originalText = btn.innerText;
 btn.innerText = "Sending...";
 btn.disabled = true;
 
-// 4. Prepare Data for Google Script
 const params = new URLSearchParams();
 params.append('Date', new Date().toLocaleString());
 params.append('Name', name);
@@ -3225,7 +3071,6 @@ params.append('Email', email);
 params.append('Phone', phone);
 params.append('Message', message);
 
-// Check if Script URL is set
 if (CONTACT_SCRIPT_URL === "YOUR_CONTACT_SCRIPT_URL_HERE" || CONTACT_SCRIPT_URL === "") {
 alert("Error: You need to set up Google Script URL in code for this to work!");
 btn.innerText = originalText;
@@ -3233,26 +3078,22 @@ btn.disabled = false;
 return;
 }
 
-// 5. Send Data
 fetch(`${CONTACT_SCRIPT_URL}?${params}`, {
 method: 'GET'
 })
 .then(response => response.text())
 .then(data => {
 console.log("Form Submitted:", data);
-// Show Thank You Toast
 showToast("Thank you! Message sent successfully.");
 
-// Clear Form
 document.getElementById('contactName').value = "";
 document.getElementById('contactEmail').value = "";
 document.getElementById('contactPhone').value = "";
 document.getElementById('contactMessage').value = "";
 
-// Redirect Logic: Close page and Reset to Home after 2 seconds
 setTimeout(() => {
-closeAllOverlays(); // Use unified close function
-resetToAll(); // Redirect to Main Home Page
+closeAllOverlays(); 
+resetToAll(); 
 }, 2000);
 })
 .catch(error => {

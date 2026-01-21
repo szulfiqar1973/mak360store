@@ -245,7 +245,7 @@ opacity: 0; /* Hide main controls when mini header is up */
 pointer-events: none;
 }
 
-.home-btn-wrapper, .reload-btn-wrapper {
+.home-btn-wrapper {
 background: #fff;
 padding: 10px;
 border-radius: 50%;
@@ -255,10 +255,7 @@ cursor: pointer;
 transition: all 0.3s ease;
 }
 .home-btn-wrapper:hover { background: #FFD700; transform: scale(1.1); }
-.reload-btn-wrapper:hover { background: #ff4d4d; color: #fff; transform: rotate(90deg) scale(1.1); }
-.home-btn-wrapper svg, .reload-btn-wrapper svg { width: 24px; height: 24px; color: #000; }
-.reload-btn-wrapper svg { color: #000; transition: color 0.3s; }
-.reload-btn-wrapper:hover svg { color: #fff; }
+.home-btn-wrapper svg { width: 24px; height: 24px; color: #000; }
 
 /* ========================================= */
 /* NEW: TOP RIGHT NAVIGATION LINKS
@@ -845,7 +842,8 @@ font-weight: 500;
 display: flex;
 justify-content: space-between;
 width: calc(100% - 40px);
-margin: 0 auto 8px;
+/* UPDATED MARGIN: Added top margin to separate from buttons above */
+margin: 15px auto 10px; 
 font-size: 11px;
 color: #888;
 font-weight: 600;
@@ -898,7 +896,7 @@ letter-spacing: 0.5px;
 display: flex;
 gap: 12px;
 width: calc(100% - 40px);
-margin: 5px auto 15px auto;
+margin: 5px auto 0px auto; /* Reduced bottom margin to 0 as codes are now below */
 align-items: center;
 margin-top: auto;
 }
@@ -1798,12 +1796,11 @@ max-width: 50%;
 <div class="mini-header-top">
 <!-- CONTROLS (LEFT - ABSOLUTE) -->
 <div class="top-controls-wrapper-mini">
-<div class="home-btn-wrapper" onclick="resetToAll()" title="Home">
+<!-- Home Button now calls forceHardReset instead of resetToAll -->
+<div class="home-btn-wrapper" onclick="forceHardReset()" title="Force Refresh">
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
 </div>
-<div class="reload-btn-wrapper" onclick="forceHardReset()" title="Force Refresh">
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
-</div>
+<!-- Reload button removed as requested -->
 </div>
 
 <!-- CATEGORY BAR (CENTERED ABSOLUTE) -->
@@ -1829,12 +1826,11 @@ max-width: 50%;
 
 <!-- 0. CONTROLS WRAPPER (TOP LEFT FIXED) -->
 <div class="top-controls-wrapper">
-<div class="home-btn-wrapper" onclick="resetToAll()" title="Home">
+<!-- Home Button now calls forceHardReset -->
+<div class="home-btn-wrapper" onclick="forceHardReset()" title="Force Refresh">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
 </div>
-<div class="reload-btn-wrapper" onclick="forceHardReset()" title="Force Refresh">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
-</div>
+<!-- Reload button removed as requested -->
 </div>
 
 <!-- 0.5 NAVIGATION LINKS (TOP RIGHT FIXED - UPDATED) -->
@@ -2471,10 +2467,6 @@ card.innerHTML=`
 </div>
 <h3>${p.title}</h3>
 <p>${p.desc}</p>
-<div class="internal-codes">
-<span>Item: ${p.itemCode || 'N/A'}</span>
-<span>Sup: ${p.supplyCode || 'N/A'}</span>
-</div>
 <div class="price-container">
 <span class="current-price">Rs ${currentPriceFormatted}</span>
  ${discountHTML}
@@ -2483,6 +2475,11 @@ card.innerHTML=`
 <div class="action-row">
 <button class="orderBtn">Add to Cart</button>
 <button class="cardShareBtn">Share</button>
+</div>
+
+<div class="internal-codes">
+<span>Item: ${p.itemCode || 'N/A'}</span>
+<span>Sup: ${p.supplyCode || 'N/A'}</span>
 </div>
 `;
 } else {
@@ -2502,10 +2499,6 @@ card.innerHTML=`
 </div>
 <h3>${p.title}</h3>
 <p>${p.desc}</p>
-<div class="internal-codes">
-<span>Item: ${p.itemCode || 'N/A'}</span>
-<span>Sup: ${p.supplyCode || 'N/A'}</span>
-</div>
 <div class="price-container">
 <span class="current-price">Rs ${currentPriceFormatted}</span>
 </div>
@@ -2513,6 +2506,11 @@ card.innerHTML=`
 <div class="action-row">
 <button class="orderBtn">Add to Cart</button>
 <button class="cardShareBtn">Share</button>
+</div>
+
+<div class="internal-codes">
+<span>Item: ${p.itemCode || 'N/A'}</span>
+<span>Sup: ${p.supplyCode || 'N/A'}</span>
 </div>
 `;
 }

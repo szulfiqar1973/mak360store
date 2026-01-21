@@ -331,6 +331,8 @@ justify-content: center;
 align-items: center;
 width: 100%;
 flex-direction: column;
+/* Ensure wrapper doesn't stretch full height if we want marquee separate */
+height: auto; 
 }
 
 .hero-group {
@@ -431,10 +433,17 @@ box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4) !important;
 }
 
 /* ========================================= */
-/* MARQUEE STYLES
+/* MARQUEE STYLES (UPDATED POSITIONING)
 /* ========================================= */
 .marquee-wrapper {
-margin-top: 20px;
+/* 
+   POSITIONING UPDATE:
+   We removed 'margin-top: 20px'. 
+   Added 'margin-top: 8vh'. This creates a responsive gap that pushes 
+   the marquee down towards the bottom, effectively centering it 
+   between the button (center) and the bottom edge (100vh).
+*/
+margin-top: 8vh; 
 width: 100%;
 height: 160px;
 overflow: hidden;
@@ -1725,11 +1734,12 @@ margin: 20px auto;
 <span>Let's Shop</span>
 <span class="lets-shop-arrow">▼</span>
 </button>
+</div>
+</div>
 
+<!-- MARQUEE MOVED HERE: Now a sibling of hero-wrapper, centered in lower space -->
 <div class="marquee-wrapper">
 <div id="marqueeTrack" class="marquee-track">
-</div>
-</div>
 </div>
 </div>
 </div>

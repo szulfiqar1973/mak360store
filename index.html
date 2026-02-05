@@ -1439,6 +1439,32 @@ background: #fff;
 margin: 0;
 }
 
+/* NEW QUERY WRAPPER STYLES - MATCHING INPUTS EXACTLY + LEFT ALIGN */
+.query-wrapper {
+    width: 100%;
+    display: none; /* Hidden by default */
+}
+
+.modal-query {
+    /* Visuals to match .modal-form input exactly */
+    width: 100%;
+    padding: 12px;           /* Matches input */
+    margin-top: 5px;         /* Matches input */
+    border: 1px solid #ccc;  /* Matches input */
+    border-radius: 12px;     /* Matches input */
+    font-size: 16px;         /* Matches input */
+    background-color: #f9f9f9; /* Light Gray background (same as inputs) */
+    color: #333;             /* Text color (readable) */
+    font-family: inherit;
+    box-sizing: border-box;
+    resize: none;            /* Removes resize handle */
+    height: 120px;           /* Height for typing */
+    line-height: 1.5;        /* Better readability for text */
+    
+    /* SPECIFIC USER REQUEST: LEFT ALIGNMENT */
+    text-align: left;        
+}
+
 /* MODAL BACK TO STORE BUTTON STYLE */
 .modal-back-store-btn {
 width: 100%;
@@ -1720,14 +1746,21 @@ margin: 20px auto;
 <label>Phone</label>
 <input class="modal-phone">
 
-<label>Quantity</label>
-<div class="qty-wrapper">
+<!-- QUANTITY WRAPPER (Standard Products) -->
+<div class="qty-wrapper" id="modalQtyWrapper">
 <button type="button" class="qty-btn minus">-</button>
 <input type="number" class="modal-qty" value="1" min="1" readonly>
 <button type="button" class="qty-btn plus">+</button>
 </div>
 
-<p style="margin-top: 15px; font-weight: bold;">Total: Rs <span class="modal-total">0</span></p>
+<!-- QUERY WRAPPER (Computer Products) - Hidden by Default -->
+<div class="form-group query-wrapper" id="modalQueryWrapper">
+    <label>Write Your Query</label>
+    <textarea class="modal-query" placeholder="Please specify your requirements..."></textarea>
+</div>
+
+<!-- TOTAL PRICE ROW (Hidden for Queries) -->
+<p id="modalTotalPriceRow" style="margin-top: 15px; font-weight: bold;">Total: Rs <span class="modal-total">0</span></p>
 
 <!-- BUTTON ORDER UPDATED: WhatsApp Button First, Back Button Second -->
 <button class="modal-waBtn" disabled>Order on WhatsApp</button>
@@ -1971,6 +2004,119 @@ clearTimeout(exitFullscreenTimeout);
 const defaultProducts = [
 
 /*================ pappoo ======================== */
+
+
+  {
+    "title": "Exquisite Traditional Set",
+    "desc": "Royal Red, Pin, Multiple & Gold Touch – Shadi aur Tyohaar ke liye perfect choice!",
+    "price": 1000,
+    "category": "Jewelries",
+    "itemCode": "ITM00032",
+    "supplyCode": "A002",
+    "slides": [
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770322349/aj97r9zh.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770322350/5kwoacrs.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770322351/rpe53k4k.webp"
+      },
+      {
+        "type": "text",
+        "text": "Ankhon jhalkaana chamak – Dulhan ke liye behtareen"
+      }
+    ]
+  },
+
+
+  {
+    "title": "Traditional Bridal",
+    "desc": "Choker Set",
+    "price": 6699,
+    "category": "Jewelries",
+    "itemCode": "ITM00031",
+    "supplyCode": "A002",
+    "slides": [
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321780/okfrel90.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321781/q8io09kx.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321782/2ossw1mc.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321783/1s37is0y.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321784/dktca6h4.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321785/5zksw9cj.webp"
+      },
+      {
+        "type": "text",
+        "text": "✨ Elevate your bridal look with our Traditional Bridal Choker Set, beautifully crafted with intricate detailing and premium-quality materials. Designed to add timeless elegance and royal charm, it’s the perfect statement piece for your special day. 👑💎"
+      }
+    ]
+  },
+
+
+  {
+    "title": "Traditional Bridal Jewelry",
+    "desc": "Floral Motifs",
+    "price": 7299,
+    "category": "Jewelries",
+    "itemCode": "ITM00030",
+    "supplyCode": "A002",
+    "slides": [
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321423/k14iqb43.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321424/kqtci3rl.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321425/cky38tu4.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321426/hg0biuln.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321427/4t0e3nnc.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321428/nnzyzj0n.webp"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770321429/tg7o6n1u.webp"
+      },
+      {
+        "type": "text",
+        "text": "✨ Refined Professional Version:\n\nThis exquisite traditional bridal jewelry features delicately crafted floral motifs that beautifully symbolize grace and elegance. Designed with exceptional craftsmanship and fine detailing, this stunning piece enhances the charm of any bridal ensemble. 💐\n\nPerfect for brides who appreciate timeless beauty and classic sophistication, this floral-inspired jewelry adds a luxurious and radiant touch to your special day. 👑💎\n\nCelebrate your wedding look with a masterpiece that blends tradition, elegance, and everlasting style. 🌸✨"
+      }
+    ]
+  },
+
 
   {
     "title": "Bridal Set",
@@ -4450,6 +4596,7 @@ slides: [
 { type: "text", text: "Customized Wall Hanging & Table Stand Frames\n\nSize 4x6 5x7 6x8 8x10: 8x12: 10x12: 12x16: \n\nMaking time: 1-2 Days" }
 ]
 },
+
 {
 title:"Name Locket",
 desc:"Gold/Silver Plated both available",
@@ -4510,7 +4657,46 @@ slides:[
 {type:"video",url:"https://res.cloudinary.com/dxj58qjsd/video/upload/v1768822726/mak360/rbdvkxn6h5xqxnmz0avo.mp4"},
 {type:"text",text:"💖 NEW ARRIVAL 💖\n✨HIGH QUALITY ✨\n💖BURBERRY Crossbody Handbags For Womens💖\n✨ Size : Large\n✨ Long Belt\n✨ Good Capacity\n✨ Colors :7\n✨ Stylish & Unique"}
 ]
-}
+},
+
+  {
+    "title": "Laptop",
+    "desc": "💻 Work, Play & Create Without Limits! ✨",
+    "price": 140000,
+    "category": "Computer",
+    "itemCode": "ITM00033",
+    "supplyCode": "A004",
+    "slides": [
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770324147/hdpel2tm.png"
+      },
+      {
+        "type": "text",
+        "text": "Upgrade your digital lifestyle with this powerful Laptop & Accessories Combo, designed to boost productivity, creativity, and entertainment all in one place. Whether you're a student, professional, gamer, or content creator, this complete setup gives you everything you need for smooth and efficient performance."
+      }
+    ]
+  },
+
+
+  {
+    "title": "Become a Job-Ready Data Analyst",
+    "desc": "🚀 Group / Individual / Online / for Students and Professionals 🚀",
+    "price": 20000,
+    "category": "Computer",
+    "itemCode": "ITM00034",
+    "supplyCode": "A004",
+    "slides": [
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dxj58qjsd/image/upload/v1770324784/z42h2kbd.png"
+      },
+      {
+        "type": "text",
+        "text": "🚀 Group / Individual / Online / for Students and Professionals!\nMaster Advanced Excel, Power BI & SQL Scripting and turn data into powerful insights. 📊💻\nStart your journey towards high-demand tech skills and unlock exciting career opportunities today!"
+      }
+    ]
+  }
 
  
 
@@ -5333,7 +5519,7 @@ const mImg = document.querySelector(".modal-img"); const mVid = document.querySe
 const mTxt = document.querySelector(".modal-textSlide"); const mMediaBox = document.querySelector(".modal-cardMedia");
 const mBackBtn = document.querySelector(".modal-backBtn");
 
-/* UPDATED openModal TO ACCEPT SLIDE INDEX */
+/* UPDATED openModal TO ACCEPT SLIDE INDEX & HANDLE CATEGORIES */
 function openModal(product, index, currentSlideIndex) {
 currentModalProduct = product; 
 modalSlideIndex = (currentSlideIndex !== undefined) ? currentSlideIndex : 0;
@@ -5346,11 +5532,39 @@ mTotal.innerText = formattedPrice;
 mName.value = ""; mAddress.value = ""; mPhone.value = ""; mQty.value =1; mWaBtn.disabled = true;
 modal.classList.add("active"); document.body.style.overflow = "hidden";
 showModalSlide();
+
+// ==========================================
+// COMPUTER CATEGORY LOGIC
+// ==========================================
+const isComputerCategory = product.category === 'Computer';
+const qtyWrapper = document.getElementById('modalQtyWrapper');
+const queryWrapper = document.getElementById('modalQueryWrapper');
+const totalPriceRow = document.getElementById('modalTotalPriceRow');
+const queryInput = document.querySelector('.modal-query');
+
+if (isComputerCategory) {
+    // Show Query Fields
+    qtyWrapper.style.display = 'none';
+    queryWrapper.style.display = 'block';
+    totalPriceRow.style.display = 'none';
+    mWaBtn.innerText = "Send Query on WhatsApp";
+    queryInput.value = ""; // Reset query
+} else {
+    // Standard Order Fields
+    qtyWrapper.style.display = 'flex';
+    queryWrapper.style.display = 'none';
+    totalPriceRow.style.display = 'block';
+    mWaBtn.innerText = "Order on WhatsApp";
 }
+// ==========================================
+}
+
 function closeModal() {
 modal.classList.remove("active"); document.body.style.overflow = "auto"; mVid.pause();
 }
+
 document.querySelector(".close-modal").onclick = closeModal;
+
 function showModalSlide() {
 mImg.style.display = mVid.style.display = mTxt.style.display = "none"; mVid.pause(); mMediaBox.classList.remove("text-active");
 let pSlides = processTextSlides(currentModalProduct.slides);
@@ -5388,6 +5602,7 @@ mTxt.style.display="flex"; mMediaBox.classList.add("text-active");
 }
 document.querySelector(".modal-leftArrow").onclick = () => { modalSlideIndex = (modalSlideIndex - 1 + currentModalProduct.slides.length) % currentModalProduct.slides.length; showModalSlide(); };
 document.querySelector(".modal-rightArrow").onclick = () => { modalSlideIndex = (modalSlideIndex + 1) % currentModalProduct.slides.length; showModalSlide(); };
+
 const btnPlus = document.querySelector('.qty-btn.plus');
 const btnMinus = document.querySelector('.qty-btn.minus');
 btnPlus.addEventListener('click', () => {
@@ -5404,31 +5619,69 @@ mQty.value = val;
 mQty.dispatchEvent(new Event('input'));
 }
 });
+
 mQty.oninput = () => {
 let basePrice = parseFloat(modal.dataset.displayPrice);
 let total = basePrice * mQty.value;
 mTotal.innerText = Math.round(total).toLocaleString('en-PK');
 };
-function checkModalForm() { mWaBtn.disabled = !(mName.value.trim() && mAddress.value.trim() && mPhone.value.trim()); }
+
+function checkModalForm() { 
+    const isComputer = currentModalProduct.category === 'Computer';
+    
+    // Standard fields always required
+    const hasStandard = (mName.value.trim() && mAddress.value.trim() && mPhone.value.trim());
+    
+    // Specific field check
+    if(isComputer) {
+        const queryVal = document.querySelector('.modal-query').value.trim();
+        mWaBtn.disabled = !(hasStandard && queryVal);
+    } else {
+        mWaBtn.disabled = !hasStandard;
+    }
+}
+
 [mName, mAddress, mPhone].forEach(el => el.oninput = checkModalForm);
+// Add listener for the new query field
+document.querySelector('.modal-query').addEventListener('input', checkModalForm);
+
 mWaBtn.onclick = () => {
 let activeSlide = currentModalProduct.slides[modalSlideIndex];
 let imageUrl = activeSlide.type === "image" ? activeSlide.url : currentModalProduct.slides[0].url;
-let totalDisplayPrice = mTotal.innerText;
 let itemCode = currentModalProduct.itemCode || 'N/A';
 let supplyCode = currentModalProduct.supplyCode || 'N/A';
-let msg = `Product: ${currentModalProduct.title}\nImage: ${imageUrl}\nQty: ${mQty.value}\nTotal: Rs ${totalDisplayPrice}\nName: ${mName.value}\nAddress: ${mAddress.value}\nPhone: ${mPhone.value}\n\n(Item Code: ${itemCode} | Sup Code: ${supplyCode})`;
+    
+let msg = "";
+let isComputer = currentModalProduct.category === 'Computer';
+
+if (isComputer) {
+    // QUERY FORMAT FOR COMPUTER
+    let queryText = document.querySelector('.modal-query').value;
+    msg = `Product: ${currentModalProduct.title}\nImage: ${imageUrl}\nQuery: ${queryText}\nName: ${mName.value}\nAddress: ${mAddress.value}\nPhone: ${mPhone.value}\n\n(Item Code: ${itemCode} | Sup Code: ${supplyCode})`;
+} else {
+    // STANDARD ORDER FORMAT
+    let totalDisplayPrice = mTotal.innerText;
+    msg = `Product: ${currentModalProduct.title}\nImage: ${imageUrl}\nQty: ${mQty.value}\nTotal: Rs ${totalDisplayPrice}\nName: ${mName.value}\nAddress: ${mAddress.value}\nPhone: ${mPhone.value}\n\n(Item Code: ${itemCode} | Sup Code: ${supplyCode})`;
+}
+
 window.open("https://wa.me/923120380605?text="+encodeURIComponent(msg), '_blank');
 closeModal();
 orderJustPlaced = true;
+
 const params = new URLSearchParams();
 params.append('OrderDate', new Date().toLocaleString());
 params.append('Product', currentModalProduct.title);
 params.append('Name', mName.value);
 params.append('Address', mAddress.value);
 params.append('Phone', mPhone.value);
-params.append('Total', totalDisplayPrice);
-params.append('Quantity', mQty.value);
+if(isComputer) {
+    params.append('Query', document.querySelector('.modal-query').value);
+    params.append('Total', 'Query Request');
+    params.append('Quantity', 'N/A');
+} else {
+    params.append('Total', mTotal.innerText);
+    params.append('Quantity', mQty.value);
+}
 params.append('ProductImage', imageUrl);
 params.append('Status', 'Pending');
 params.append('ItemCode', itemCode);
@@ -5445,6 +5698,7 @@ console.error('Error!', error.message);
 showToast("Error saving to Sheet, but WA sent!");
 });
 };
+
 function showToast(message) {
 const toast = document.getElementById("toast");
 toast.innerText = message;

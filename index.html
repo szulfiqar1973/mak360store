@@ -1933,6 +1933,8 @@ const CAT_DB_KEY = 'MAK360_Categories';
 let currentCategoryFilter = 'All';
 let isNavigating = false;
 let orderJustPlaced = false;
+// NEW: Variable to track the last clicked card element
+let lastActiveProductCard = null;
 
 /* --- APP MODE FULLSCREEN LOGIC --- */
 let exitFullscreenTimeout;
@@ -4510,6 +4512,8 @@ slides:[
 ]
 }
 
+ 
+
 ];
 
 const defaultCategories = [
@@ -4839,11 +4843,12 @@ openZoom(realIndex, i);
 };
 }
 
-/* ORDER BUTTON CLICK LOGIC (FIXED) */
+/* ORDER BUTTON CLICK LOGIC (UPDATED) */
 card.querySelector(".orderBtn").onclick = (e) => {
 e.stopPropagation();
 e.stopImmediatePropagation();
-// Get the current slide index stored in the dataset
+// IMPORTANT: Track this card for "Back to Store" functionality
+lastActiveProductCard = card; 
 let currentSlideIndex = parseInt(card.dataset.currentSlide) || 0;
 openModal(p, realIndex, currentSlideIndex);
 };
@@ -5568,12 +5573,52 @@ fetch(VISITOR_TRACKER_URL, { method: 'GET', mode: 'no-cors' })
 }
 
 /* ========================================= */
-/* LOGIC FOR NEW "BACK TO MAIN STORE" BUTTON
+/* LOGIC FOR "BACK TO MAIN STORE" BUTTON
 /* ========================================= */
 document.querySelector('.modal-back-store-btn').addEventListener('click', () => {
     closeModal();
-    // Ensures we go back to the 'All' category view as requested
-    switchView('All');
+    
+    // Restore Scroll and Focus to the specific card
+    if (lastActiveProductCard) {
+        // Check if card is still in DOM (it should be unless category changed behind it)
+        if (document.body.contains(lastActiveProductCard)) {
+            
+            // Calculate position
+            const rect = lastActiveProductCard.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            // -100 buffer for the sticky header
+            const targetY = rect.top + scrollTop - 100;
+
+            window.scrollTo({
+                top: targetY,
+                behavior: 'smooth'
+            });
+
+            // Reset card slideshow to beginning
+            if (lastActiveProductCard.reset) {
+                lastActiveProductCard.reset();
+            }
+
+            // Highlight effect to show user where they are
+            lastActiveProductCard.style.transition = "all 0.3s ease";
+            lastActiveProductCard.style.transform = "scale(1.05)";
+            lastActiveProductCard.style.borderColor = "#FFD700";
+            lastActiveProductCard.style.boxShadow = "0 0 20px rgba(255, 215, 0, 0.5)";
+            lastActiveProductCard.style.zIndex = "10";
+
+            setTimeout(() => {
+                lastActiveProductCard.style.transform = "";
+                lastActiveProductCard.style.borderColor = "";
+                lastActiveProductCard.style.boxShadow = "";
+                lastActiveProductCard.style.zIndex = "";
+                lastActiveProductCard = null; // Clear reference
+            }, 1000);
+        } else {
+            // If card was removed (unlikely in this flow), just scroll to top of container
+            const containerTop = document.getElementById('productContainer').getBoundingClientRect().top + window.scrollY - 90;
+            window.scrollTo({top: containerTop, behavior: 'smooth'});
+        }
+    }
 });
 
 window.addEventListener('DOMContentLoaded', () => {

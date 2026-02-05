@@ -221,7 +221,6 @@ gap: 15px;
 transition: opacity 0.3s;
 }
 
-/* This CSS ensures they vanish when the mini header appears */
 body.has-mini-header .nav-links-wrapper {
 opacity: 0;
 pointer-events: none;
@@ -237,7 +236,7 @@ letter-spacing: 0.5px;
 cursor: pointer;
 transition: all 0.3s ease;
 position: relative;
-white-space: nowrap; /* Prevents wrapping */
+white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -263,13 +262,13 @@ left: 0;
 /* MOBILE FIX: Align to Home Row & Prevent Wrap */
 @media(max-width: 600px) {
 .nav-links-wrapper {
-top: 22px; /* Aligns with Home Icon Row */
+top: 22px;
 right: 10px;
-gap: 8px; /* Reduced gap */
+gap: 8px;
 }
 .nav-link {
-font-size: 9px; /* Smaller font to fit */
-font-weight: 700; /* Bolder for readability */
+font-size: 9px;
+font-weight: 700;
 }
 }
 
@@ -1180,7 +1179,6 @@ margin-bottom: 40px;
 line-height: 1.5;
 }
 
-/* Two Column Layout for Contact */
 .contact-grid {
 display: grid;
 grid-template-columns: 1fr 1fr;
@@ -1241,7 +1239,6 @@ color: #fff;
 text-decoration: underline;
 }
 
-/* Contact Form Styles */
 .contact-form-section {
 background: #111;
 padding: 25px;
@@ -1302,10 +1299,6 @@ transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
 background: #fff;
 box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 transform: translateY(-2px);
-}
-
-.contact-submit-btn:active {
-transform: translateY(0);
 }
 
 /* ========================================= */
@@ -1446,9 +1439,29 @@ background: #fff;
 margin: 0;
 }
 
+/* MODAL BACK TO STORE BUTTON STYLE */
+.modal-back-store-btn {
+width: 100%;
+padding: 12px;
+background: #e0e0e0;
+color: #333;
+border: none;
+border-radius: 12px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: background 0.2s;
+margin-top: 10px;
+margin-bottom: 5px;
+}
+.modal-back-store-btn:hover {
+background: #d0d0d0;
+color: #000;
+}
+
 .modal-waBtn {
 width: 100%;
-margin-top: 25px;
+margin-top: 5px;
 padding: 15px;
 background: linear-gradient(45deg, #25D366, #128C7E);
 color: white;
@@ -1716,7 +1729,13 @@ margin: 20px auto;
 
 <p style="margin-top: 15px; font-weight: bold;">Total: Rs <span class="modal-total">0</span></p>
 
+<!-- BUTTON ORDER UPDATED: WhatsApp Button First, Back Button Second -->
 <button class="modal-waBtn" disabled>Order on WhatsApp</button>
+
+<!-- NEW BACK TO MAIN STORE BUTTON -->
+<button class="modal-back-store-btn">Back to Main Store</button>
+<!-- END NEW BUTTON -->
+
 </div>
 </div>
 </div>
@@ -1949,10 +1968,7 @@ clearTimeout(exitFullscreenTimeout);
 /* SEED DATA (DEFAULT PRODUCTS) --- */
 const defaultProducts = [
 
-/* ==========pappoo start from below=========== */
-
-
-
+/*================ pappoo ======================== */
 
   {
     "title": "Bridal Set",
@@ -4493,6 +4509,7 @@ slides:[
 {type:"text",text:"💖 NEW ARRIVAL 💖\n✨HIGH QUALITY ✨\n💖BURBERRY Crossbody Handbags For Womens💖\n✨ Size : Large\n✨ Long Belt\n✨ Good Capacity\n✨ Colors :7\n✨ Stylish & Unique"}
 ]
 }
+
 ];
 
 const defaultCategories = [
@@ -4792,7 +4809,7 @@ mediaBox.classList.add("text-active");
 txt.scrollTop = 0;
 shareBtn.classList.add('hidden');
 }
-card.dataset.currentSlide = i;
+card.dataset.currentSlide = i; // Store current slide index
 }
 show();
 function reset() { i = 0; show(); }
@@ -4822,10 +4839,13 @@ openZoom(realIndex, i);
 };
 }
 
+/* ORDER BUTTON CLICK LOGIC (FIXED) */
 card.querySelector(".orderBtn").onclick = (e) => {
 e.stopPropagation();
 e.stopImmediatePropagation();
-openModal(p, realIndex);
+// Get the current slide index stored in the dataset
+let currentSlideIndex = parseInt(card.dataset.currentSlide) || 0;
+openModal(p, realIndex, currentSlideIndex);
 };
 
 shareBtn.onclick = (e) => {
@@ -5308,8 +5328,10 @@ const mImg = document.querySelector(".modal-img"); const mVid = document.querySe
 const mTxt = document.querySelector(".modal-textSlide"); const mMediaBox = document.querySelector(".modal-cardMedia");
 const mBackBtn = document.querySelector(".modal-backBtn");
 
-function openModal(product, index) {
-currentModalProduct = product; modalSlideIndex = index;
+/* UPDATED openModal TO ACCEPT SLIDE INDEX */
+function openModal(product, index, currentSlideIndex) {
+currentModalProduct = product; 
+modalSlideIndex = (currentSlideIndex !== undefined) ? currentSlideIndex : 0;
 let displayPrice = product.price *1.75;
 let formattedPrice = Math.round(displayPrice).toLocaleString('en-PK');
 mTitle.innerText = product.title;
@@ -5544,6 +5566,16 @@ fetch(VISITOR_TRACKER_URL, { method: 'GET', mode: 'no-cors' })
 .catch(error => { console.error("Error tracking visitor:", error); });
 }
 }
+
+/* ========================================= */
+/* LOGIC FOR NEW "BACK TO MAIN STORE" BUTTON
+/* ========================================= */
+document.querySelector('.modal-back-store-btn').addEventListener('click', () => {
+    closeModal();
+    // Ensures we go back to the 'All' category view as requested
+    switchView('All');
+});
+
 window.addEventListener('DOMContentLoaded', () => {
 console.log("DOM Loaded");
 trackVisitor();
